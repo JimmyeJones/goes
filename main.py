@@ -1,4 +1,4 @@
-import strealit as st
+import streamlit as st
 st.title("Quadratic Calculator")
 a = st.textbox("Enter the 'a' variable")
 if a != int():
