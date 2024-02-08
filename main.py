@@ -5,4 +5,4 @@ a = st.text_input("Enter the 'a' variable")
 b = st.text_input("Enter the 'b' variable")
 c = st.text_input("Enter the 'c' variable")
 if st.button("Calculate"):
-  st.subheader((-b+math.sqrt(b*b-4ac))/2a)
+  st.subheader((-b+math.sqrt((b*b)-4*a*c))/2a)
