@@ -18,8 +18,8 @@ def main():
     if len(folders_with_images) == 0:
         st.warning("No folders with images found in the directory!")
         return
-    #work here eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-    image_types = [["Full Color"],["FC"]]
+
+    image_types = [["Full Color", "Red", "Near Infrared", "Cirrus", "Snow/Ice", "Cloud Particle Size", "Thermal", "Mid-level water vapor"],["FC"]]
   
     folder_selected = st.sidebar.selectbox("Select a folder", folders_with_images)
     image_type = st.sidebar.selectbox("Select image type", 
