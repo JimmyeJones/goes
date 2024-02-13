@@ -1,8 +1,62 @@
 import streamlit as st
-import math
-st.title("Quadratic Calculator")
-a = int(st.text_input("Enter the 'a' variable"))
-b = int(st.text_input("Enter the 'b' variable"))
-c = int(st.text_input("Enter the 'c' variable"))
-if st.button("Calculate"):
-  st.subheader((-b+math.sqrt((b*b)-4*a*c))/2*a)
+import os
+from PIL import Image
+import io
+
+
+def main():
+    st.title("GOES 16 Images")
+
+    folder_path = "./GOES"
+    
+    if not os.path.exists(folder_path):
+        st.error("Folder not found!")
+        return
+
+    folders_with_images = [root for root, _, files in os.walk(folder_path) if any(file.endswith(('.jpg', '.jpeg', '.png', '.gif')) and "FC" in file for file in files)]
+    
+    if len(folders_with_images) == 0:
+        st.warning("No folders with images found in the directory!")
+        return
+    #work here eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    image_types = [["Full Color"],["FC"]]
+  
+    folder_selected = st.sidebar.selectbox("Select a folder", folders_with_images)
+    image_type = st.sidebar.selectbox("Select image type", 
+
+    image_files = [os.path.join(folder_selected, file) for file in os.listdir(folder_selected) if file.endswith(('.jpg', '.jpeg', '.png', '.gif')) and "FC" in file]
+    
+    if len(image_files) == 0:
+        st.warning("No images found in the selected folder!")
+        return
+    
+    st.write(f"Selected folder: {folder_selected}")
+
+    st.subheader("Timelapse GIF")
+    create_timelapse(folder_selected, )
+
+    st.subheader("Images")
+    for img_file in image_files:
+        st.image(img_file, use_column_width=True)
+
+def create_timelapse(folder_path, image_type):
+    image_files = [os.path.join(folder_path, file) for file in os.listdir(folder_path) if file.endswith(('.jpg', '.jpeg', '.png', '.gif')) and image_type in file]
+    image_files.sort(key=os.path.getmtime)
+
+    if len(image_files) == 0:
+        st.warning("No image files found in the folder!")
+        return
+    
+    images = [Image.open(img_file).resize((800, 600)) for img_file in image_files]
+
+    gif_bytes = create_gif(images)
+
+    st.image(gif_bytes)
+
+def create_gif(images):
+    gif_bytes = io.BytesIO()
+    images[0].save(gif_bytes, format="GIF", save_all=True, append_images=images[1:], loop=0, duration=100)
+    return gif_bytes.getvalue()
+
+if __name__ == "__main__":
+    main()
