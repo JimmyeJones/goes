@@ -36,7 +36,7 @@ def main():
     st.write(f"Selected folder: {folder_selected}")
 
     st.subheader("Timelapse GIF")
-    create_timelapse(folder_selected, image_type)
+    create_timelapse(folder_selected, file_image_type)
 
     st.subheader("Images")
     for img_file in image_files:
