@@ -9,7 +9,7 @@ def main():
 
     folder_path = "./GOES"
 
-    image_types = [["Full Color1", "Red2", "Near Infrared3", "Cirrus4", "Snow/Ice5", "Cloud Particle Size6", "Thermal7", "Mid-level water vapor8", "Lower-level water vapor9", "Cloud-top10", "Ozone-level11", "Infrared-less sensitive12", "Infrared13", "Infrared-sensitive14", "Carbon Dioxide15"],["G16_FC", "G16_2", "G16_3", "G16_4", "G16_5", "G16_6", "G16_7", "G16_8", "G16_9", "G16_10", "G16_11", "G16_12", "G16_13", "G16_14", "G16_15", "G16_16"]]
+    image_types = [["Full Color1", "Red2", "Near Infrared3", "Cirrus4", "Snow/Ice5", "Cloud Particle Size6", "Thermal7", "Mid-level water vapor8", "Lower-level water vapor9", "Cloud-top10", "Ozone-level11", "Infrared-less sensitive12", "Infrared13", "Infrared-sensitive14", "Carbon Dioxide15"], ["_FC_", "_2_", "_3_", "_4_", "_5_", "_6_", "_7_", "_8_", "_9_", "_10_", "_11_", "_12_", "_13_", "_14_", "_15_", "_16_"]]
   
     folder_selected = st.sidebar.selectbox("Select a folder", folders_with_images)
     image_type = st.sidebar.selectbox("Select image type", image_types[0])
@@ -20,14 +20,14 @@ def main():
         st.error("Folder not found!")
         return
 
-    folders_with_images = [root for root, _, files in os.walk(folder_path) if any(file.endswith(('.jpg', '.jpeg', '.png', '.gif')) and "FC" in file for file in files)]
+    folders_with_images = [root for root, _, files in os.walk(folder_path) if any(file.endswith(('.jpg', '.jpeg', '.png', '.gif')) and file_image_type in file for file in files)]
     
     if len(folders_with_images) == 0:
         st.warning("No folders with images found in the directory!")
         return
 
 
-    image_files = [os.path.join(folder_selected, file) for file in os.listdir(folder_selected) if file.endswith(('.jpg', '.jpeg', '.png', '.gif')) and str(file_image_type) in file]
+    image_files = [os.path.join(folder_selected, file) for file in os.listdir(folder_selected) if file.endswith(('.jpg', '.jpeg', '.png', '.gif')) and file_image_type in file]
     
     if len(image_files) == 0:
         st.warning("No images found in the selected folder!")
