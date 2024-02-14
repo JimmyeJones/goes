@@ -8,6 +8,13 @@ def main():
     st.title("GOES 16 Images")
 
     folder_path = "./GOES"
+
+    image_types = [["Full Color1", "Red2", "Near Infrared3", "Cirrus4", "Snow/Ice5", "Cloud Particle Size6", "Thermal7", "Mid-level water vapor8", "Lower-level water vapor9", "Cloud-top10", "Ozone-level11", "Infrared-less sensitive12", "Infrared13", "Infrared-sensitive14", "Carbon Dioxide15"],["G16_FC", "G16_2", "G16_3", "G16_4", "G16_5", "G16_6", "G16_7", "G16_8", "G16_9", "G16_10", "G16_11", "G16_12", "G16_13", "G16_14", "G16_15", "G16_16"]]
+  
+    folder_selected = st.sidebar.selectbox("Select a folder", folders_with_images)
+    image_type = st.sidebar.selectbox("Select image type", image_types[0])
+    file_image_type = image_types[1][image_types[0].index(image_type)]
+    st.sidebar.text(file_image_type)
     
     if not os.path.exists(folder_path):
         st.error("Folder not found!")
@@ -19,12 +26,7 @@ def main():
         st.warning("No folders with images found in the directory!")
         return
 
-    image_types = [["Full Color1", "Red2", "Near Infrared3", "Cirrus4", "Snow/Ice5", "Cloud Particle Size6", "Thermal7", "Mid-level water vapor8", "Lower-level water vapor9", "Cloud-top10", "Ozone-level11", "Infrared-less sensitive12", "Infrared13", "Infrared-sensitive14", "Carbon Dioxide15"],["G16_FC", "G16_2", "G16_3", "G16_4", "G16_5", "G16_6", "G16_7", "G16_8", "G16_9", "G16_10", "G16_11", "G16_12", "G16_13", "G16_14", "G16_15", "G16_16"]]
-  
-    folder_selected = st.sidebar.selectbox("Select a folder", folders_with_images)
-    image_type = st.sidebar.selectbox("Select image type", image_types[0])
-    file_image_type = image_types[1][image_types[0].index(image_type)]
-    st.sidebar.text(file_image_type)
+
     image_files = [os.path.join(folder_selected, file) for file in os.listdir(folder_selected) if file.endswith(('.jpg', '.jpeg', '.png', '.gif')) and str(file_image_type) in file]
     
     if len(image_files) == 0:
