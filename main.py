@@ -37,7 +37,7 @@ def main():
     for img_file in image_files:
         st.image(img_file, use_column_width=True)
 def create_timelapse(folder_path, file_image_type):
-    image_files = [os.path.join(folder_path, file) for file in os.listdir(folder_path) if file.endswith(('.jpg', '.jpeg', '.png', '.gif')) and image_type in file]
+    image_files = [os.path.join(folder_path, file) for file in os.listdir(folder_path) if file.endswith(('.jpg', '.jpeg', '.png', '.gif')) and file_image_type in file]
     image_files.sort(key=os.path.getmtime)
     if len(image_files) == 0:
         st.warning("No image files found in the folder!")
