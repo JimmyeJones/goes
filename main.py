@@ -11,8 +11,7 @@ def main():
     if not os.path.exists(folder_path):
         st.error("Folder not found!")
         return
-    folders_with_images = [root for root, _, files in os.walk(folder_path) if any(file.endswith('.jpg', '.jpeg', '.png', '.gif'))]
-    
+    folders_with_images = [root for root, _, files in os.walk(folder_path) if any(file.endswith(('.jpg', '.jpeg', '.png', '.gif')) and "" in file for file in files)]
     if len(folders_with_images) == 0:
         st.warning("No folders with images found in the directory!")
         return
