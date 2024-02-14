@@ -16,7 +16,7 @@ def main():
         st.warning("No folders with images found in the directory!")
         return
 
-    image_types = [["Full Color", "Blue", "Red", "Near Infrared", "Cirrus", "Snow/Ice", "Cloud Particle Size", "Thermal", "Upper-level water vapor", "Mid-level water vapor", "Lower-level water vapor", "Cloud-top", "Ozone-level", "Infrared-less sensitive", "Infrared", "Infrared-sensitive", "Carbon Dioxide"],["G16_FC", "G16_1", "G16_2", "G16_3", "G16_4", "G16_5", "G16_6", "G16_7", "G16_8", "G16_9", "G16_10", "G16_11", "G16_12", "G16_13", "G16_14", "G16_15", "G16_16"]]
+    image_types = [["All Images", "Full Color", "Blue", "Red", "Near Infrared", "Cirrus", "Snow/Ice", "Cloud Particle Size", "Thermal", "Upper-level water vapor", "Mid-level water vapor", "Lower-level water vapor", "Cloud-top", "Ozone-level", "Infrared-less sensitive", "Infrared", "Infrared-sensitive", "Carbon Dioxide"],["", "G16_FC", "G16_1", "G16_2", "G16_3", "G16_4", "G16_5", "G16_6", "G16_7", "G16_8", "G16_9", "G16_10", "G16_11", "G16_12", "G16_13", "G16_14", "G16_15", "G16_16"]]
 
     folder_selected = st.sidebar.selectbox("Select a folder", folders_with_images)
     image_type = st.sidebar.selectbox("Select image type", image_types[0])
