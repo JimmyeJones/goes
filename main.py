@@ -23,7 +23,10 @@ def main():
     file_image_type = image_types[1][image_types[0].index(image_type)]
     st.sidebar.write("Timelapse feature is not recommended for all images")
     output_type = st.sidebar.selectbox("Select a display type", ["Timelape", "Images"])
-
+    date_day = st.sidebar.text_input("Enter the day you want to view (ONLY NUMBER)")
+    date_month = st.sidebar.text_input("Enter the month you want to view (ONLY NUMBER)")
+    
+    
     image_files = [os.path.join(folder_selected, file) for file in os.listdir(folder_selected) if file.endswith(('.jpg', '.jpeg', '.png', '.gif')) and file_image_type in file]
 
     if len(image_files) == 0:
