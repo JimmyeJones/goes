@@ -21,7 +21,7 @@ def main():
     folder_selected = st.sidebar.selectbox("Select a folder", folders_with_images)
     image_type = st.sidebar.selectbox("Select image type", image_types[0])
     file_image_type = image_types[1][image_types[0].index(image_type)]
-    output_type = st.sidebar.selectbox("Select a display type", ["Timelape", "All Images"])
+    output_type = st.sidebar.selectbox("Select a display type", ["Timelape *Recomended to not use all images*", "Images"])
 
     image_files = [os.path.join(folder_selected, file) for file in os.listdir(folder_selected) if file.endswith(('.jpg', '.jpeg', '.png', '.gif')) and file_image_type in file]
 
@@ -29,12 +29,17 @@ def main():
         st.warning("No images found in the selected folder!")
         return
     
-    st.write(f"Selected folder: {folder_selected}")
-    st.subheader("Timelapse GIF")
-    create_timelapse(folder_selected, file_image_type)
-    st.subheader("Images")
-    for img_file in image_files:
-        st.image(img_file, use_column_width=True)
+    st.write(folder_selected)
+    if output_type == "Timelape *Recomended to not use all images*":
+        
+        st.subheader("Timelapse GIF")
+        create_timelapse(folder_selected, file_image_type)
+
+    if output_type == "Images":
+        
+        st.subheader("Images")
+        for img_file in image_files:
+            st.image(img_file, use_column_width=True)
 def create_timelapse(folder_path, file_image_type):
     image_files = [os.path.join(folder_path, file) for file in os.listdir(folder_path) if file.endswith(('.jpg', '.jpeg', '.png', '.gif')) and file_image_type in file]
     image_files.sort(key=os.path.getmtime)
