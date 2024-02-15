@@ -21,7 +21,7 @@ def main():
     folder_selected = st.sidebar.selectbox("Select a folder", folders_with_images)
     image_type = st.sidebar.selectbox("Select image type", image_types[0])
     file_image_type = image_types[1][image_types[0].index(image_type)]
-    st.sidebar.subheader("*Timelapse feature is not recommended for all images*")
+    st.sidebar.write("Timelapse feature is not recommended for all images")
     output_type = st.sidebar.selectbox("Select a display type", ["Timelape", "Images"])
 
     image_files = [os.path.join(folder_selected, file) for file in os.listdir(folder_selected) if file.endswith(('.jpg', '.jpeg', '.png', '.gif')) and file_image_type in file]
