@@ -86,6 +86,13 @@ def create_timelapse(folder_path, file_image_type):
     images = [Image.open(img_file).resize((800, 600)) for img_file in image_files]
     gif_bytes = create_gif(images)
     st.image(gif_bytes)
+    with open(gif_bytes, "rb") as file:
+        st.download_button(
+        label="Download",
+        data=file,
+        file_name="image.gif",
+        mime="image/gif"
+        )
 def create_gif(images):
     gif_bytes = io.BytesIO()
     images[0].save(gif_bytes, format="GIF", save_all=True, append_images=images[1:], loop=0, duration=100)
