@@ -39,13 +39,43 @@ def main():
     if output_type == "Images":
         
         st.subheader("Images")
+        button_key=1
         for img_file in image_files:
             st.image(img_file, use_column_width=True)
-             download_button = st.download_button(
-                label="Download All Images",
-                data=img_file,  # Provide the folder path to download
-                file_name="image.jpg",  # Name of the zip file to download
-                mime="application/jpg"
+            st.text(img_file)
+            button_key += 1
+            with open(img_file, "rb") as file:
+                st.download_button(
+                    label="Download File",
+                    data=file,
+                    file_name="image.png",
+                    mime="image/png",
+                    key=button_key
+                    )
+            
+            
+def create_combined_image(folder_path, output_path):
+    image_files = [os.path.join(folder_path, file) for file in os.listdir(folder_path) if file.endswith(('.jpg', '.jpeg', '.png', '.gif')) and "FC" in file]
+    if not image_files:
+        st.error("No images found in the selected folder!")
+        return False
+
+    images = [Image.open(img_file) for img_file in image_files]
+    widths, heights = zip(*(img.size for img in images))
+    max_width = max(widths)
+    total_height = sum(heights)
+
+    combined_image = Image.new("RGB", (max_width, total_height), color=(255, 255, 255))
+
+    y_offset = 0
+    for img in images:
+        combined_image.paste(img, (0, y_offset))
+        y_offset += img.size[1]
+
+    combined_image.save(output_path)
+    return True
+    
+    
 def create_timelapse(folder_path, file_image_type):
     image_files = [os.path.join(folder_path, file) for file in os.listdir(folder_path) if file.endswith(('.jpg', '.jpeg', '.png', '.gif')) and file_image_type in file]
     image_files.sort(key=os.path.getmtime)
