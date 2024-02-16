@@ -26,7 +26,7 @@ def main():
         for file31 in file32:
             if type12 in file31:
                 present_image_types.append(type12)
-                break
+                
 
     st.sidebar.text(present_image_types)
 
