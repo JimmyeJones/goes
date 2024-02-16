@@ -35,7 +35,7 @@ def main():
     for img_type24 in present_image_types:
         present_image_types_list[0].append(image_types[0][image_types[1].index(img_type24)])
     
-    image_type = st.sidebar.selectbox("Select image type", image_types[0])
+    image_type = st.sidebar.selectbox("Select image type", present_image_types_list[0])
     file_image_type = image_types[1][image_types[0].index(image_type)]
     st.sidebar.write("Timelapse feature is not recommended for all images")
     output_type = st.sidebar.selectbox("Select a display type", ["Timelape", "Images"])
