@@ -27,6 +27,8 @@ def main():
             if type12 in file31:
                 if type12 not in present_image_types:
                     present_image_types.append(type12)
+                else:
+                    break
                 
 
     st.sidebar.text(present_image_types)
