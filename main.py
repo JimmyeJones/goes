@@ -19,15 +19,28 @@ def main():
     image_types = [["All Images", "Full Color", "Blue", "Red", "Near Infrared", "Cirrus", "Snow/Ice", "Cloud Particle Size", "Thermal", "Upper-level water vapor", "Mid-level water vapor", "Lower-level water vapor", "Cloud-top", "Ozone-level", "Infrared-less sensitive", "Infrared", "Infrared-sensitive", "Carbon Dioxide"],["", "_FC_", "_1_", "_2_", "_3_", "_4_", "_5_", "_6_", "_7_", "_8_", "_9_", "_10_", "_11_", "_12_", "_13_", "_14_", "_15_", "_16_"]]
 
     folder_selected = st.sidebar.selectbox("Select a folder", folders_with_images)
+
+    present_image_types = []
+    files32 = os.listdir(folder_path)
+    for type12 in image_types[1]:
+        for file31 in file32:
+            if type12 in file31:
+                present_image_types.append(type12)
+                break
+
+    st.sidebar.text(present_image_types)
+
+    
     image_type = st.sidebar.selectbox("Select image type", image_types[0])
     file_image_type = image_types[1][image_types[0].index(image_type)]
     st.sidebar.write("Timelapse feature is not recommended for all images")
     output_type = st.sidebar.selectbox("Select a display type", ["Timelape", "Images"])
-    date_day = st.sidebar.text_input("Enter the day you want to view (ONLY NUMBER)")
-    date_month = st.sidebar.text_input("Enter the month you want to view (ONLY NUMBER)")
-    date_year = st.sidebar.text_input("Enter the year you want to view (ONLY NUMBER)")
+    #date_day = st.sidebar.text_input("Enter the day you want to view (ONLY NUMBER)")
+    #date_month = st.sidebar.text_input("Enter the month you want to view (ONLY NUMBER)")
+    #date_year = st.sidebar.text_input("Enter the year you want to view (ONLY NUMBER)")
 
-    full_date = f"_{date_year}{date_month}{date_day}"
+    #full_date = f"_{date_year}{date_month}{date_day}"
+    full_date = ""
     
     image_files = [os.path.join(folder_selected, file) for file in os.listdir(folder_selected) if file.endswith(('.jpg', '.jpeg', '.png', '.gif')) and (file_image_type and full_date) in file]
 
