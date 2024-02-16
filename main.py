@@ -29,7 +29,6 @@ def main():
                     present_image_types.append(type12)
                 
 
-    st.sidebar.text(present_image_types)
 
     present_image_types_list = [[], present_image_types]
     for img_type24 in present_image_types:
