@@ -31,6 +31,9 @@ def main():
 
     st.sidebar.text(present_image_types)
 
+    present_image_types_list = [[], present_image_types]
+    for img_type24 in present_image_types:
+        present_image_types_list[0].append(image_types[0][image_types[1].index(img_type24)])
     
     image_type = st.sidebar.selectbox("Select image type", image_types[0])
     file_image_type = image_types[1][image_types[0].index(image_type)]
