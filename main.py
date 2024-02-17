@@ -45,7 +45,7 @@ def main():
     #full_date = f"_{date_year}{date_month}{date_day}"
     full_date = ""
     
-    image_files = [os.path.join(folder_selected, file) for file in os.listdir(folder_selected) if file.endswith(('.jpg', '.jpeg', '.png', '.gif')) and (file_image_type and full_date) in file]
+    image_files = [os.path.join(folder_selected, file) for file in os.listdir(folder_selected) if file.endswith(('.jpg', '.jpeg', '.png', '.gif')) and file_image_type in file and full_date in file]
 
     if len(image_files) == 0:
         st.warning("No images found in the selected folder!")
