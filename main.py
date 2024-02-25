@@ -2,6 +2,7 @@ import streamlit as st
 import os
 from PIL import Image
 import io
+from datetime import datetime
 
 def main():
     st.title("GOES 16 Images")
@@ -70,9 +71,9 @@ def main():
             button_key += 1
             with open(img_file, "rb") as file:
                 st.download_button(
-                    label="Download",
+                    label=f"Download {os.path.basename(img_file)}",  # Use actual filename in the download button label
                     data=file,
-                    file_name="image.png",
+                    file_name=os.path.basename(img_file),  # Use actual filename as the downloaded file name
                     mime="image/png",
                     key=button_key
                 )
@@ -110,13 +111,16 @@ def create_timelapse(folder_path, file_image_type):
         return
 
     images = [Image.open(img_file).resize((800, 600)) for img_file in image_files]
+    first_image_time = datetime.fromtimestamp(os.path.getmtime(image_files[0])).strftime("%Y-%m-%d_%H-%M-%S")
+    last_image_time = datetime.fromtimestamp(os.path.getmtime(image_files[-1])).strftime("%Y-%m-%d_%H-%M-%S")
     gif_bytes = create_gif(images)
+
     st.image(gif_bytes)
 
     st.download_button(
-        label="Download",
+        label=f"Download {first_image_time}_{last_image_time}.gif",
         data=gif_bytes,
-        file_name="image.gif",
+        file_name=f"{first_image_time}_{last_image_time}.gif",
         mime="image/gif"
     )
 
