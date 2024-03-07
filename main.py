@@ -7,7 +7,7 @@ from datetime import datetime
 def main():
     st.title("GOES 16 Images")
 
-    folder_path = "./GOES"
+    folder_path = "/workspaces/goes/GOES"
 
     if not os.path.exists(folder_path):
         st.error("Folder not found!")
